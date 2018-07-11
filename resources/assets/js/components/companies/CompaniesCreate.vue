@@ -1,11 +1,9 @@
 <template>
     <div>
-        <div class="form-group">
-            <router-link to="/" class="btn btn-primary">Back</router-link>
-        </div>
-
         <div class="card">
-            <div class="card-header">Create new company</div>
+            <div class="card-header">
+                Create new company
+            </div>
             <div class="card-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
@@ -34,6 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
+                            <router-link to="/" class="btn btn-primary">Back</router-link>
                             <button class="btn btn-success">Create</button>
                         </div>
                     </div>
@@ -47,27 +46,22 @@
     export default {
         data: function () {
             return {
-                company: {
-                    name: '',
-                    address: '',
-                    website: '',
-                    email: '',
-                }
+                company: {}
             }
         },
         methods: {
             saveForm() {
-                event.preventDefault();
                 var app = this;
                 var newCompany = app.company;
+
                 axios.post('/api/v1/companies', newCompany)
-                    .then(function (resp) {
-                        app.$router.push({path: '/'});
-                    })
-                    .catch(function (resp) {
-                        console.log(resp);
-                        alert("Could not create your company");
-                    });
+                .then(function (resp) {
+                    app.$router.push({path: '/'});
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Could not create your company");
+                });
             }
         }
     }

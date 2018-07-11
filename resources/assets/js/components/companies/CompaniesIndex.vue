@@ -1,12 +1,11 @@
 <template>
     <div>
-        <div class="form-group">
-            <router-link :to="{name: 'createCompany'}" class="btn btn-info">Create new company</router-link>
-        </div>
+        <div class="card">
+            <div class="card-header">
+                <router-link :to="{name: 'createCompany'}" class="btn btn-info float-right">Add new company</router-link>
+            </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Companies list</div>
-            <div class="panel-body">
+            <div class="card-body">
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -62,12 +61,12 @@
                 if (confirm("Do you really want to delete it?")) {
                     var app = this;
                     axios.delete('/api/v1/companies/' + id)
-                        .then(function (resp) {
-                            app.companies.splice(index, 1);
-                        })
-                        .catch(function (resp) {
-                            alert("Could not delete company");
-                        });
+                    .then(function (resp) {
+                        app.companies.splice(index, 1);
+                    })
+                    .catch(function (resp) {
+                        alert("Could not delete company");
+                    });
                 }
             }
         }
